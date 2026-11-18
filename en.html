@@ -1,0 +1,630 @@
+<!doctype html>
+<!--
+  NamThang landing page — English. Same page as index.html, same stylesheet and
+  script; only the words and the lang attribute differ. Keep the two files in step:
+  a change to markup or structure belongs in both.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NamThang — hear everything the screen changes</title>
+<meta name="description" content="NamThang is a free assistive layer for blind and low-vision people on Windows. It reads the accessibility data Windows already exposes and says what changed. Keyboard first, and it works alongside NVDA, JAWS and Narrator.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="imgs/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="imgs/icon-180.png">
+<link rel="alternate" hreflang="th" href="index.html">
+<link rel="alternate" hreflang="en" href="./en.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NamThang — hear everything the screen changes">
+<meta property="og:description" content="A free Windows assistant for blind users: focus to first sound in 12.9 ms (p95), measured over 222 focus changes.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="imgs/icon-512.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the main content</a>
+
+<div class="scroll-cue" id="scroll-cue" aria-hidden="true">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+    <path d="M8 3v10M4 9l4 4 4-4"/>
+  </svg>
+</div>
+
+<header class="site-head">
+  <div class="wrap site-head__in">
+    <a class="brand" href="#top" aria-label="NamThang — back to the top">
+      <img class="brand__mark" src="imgs/logo.svg" alt="" width="32" height="32">
+      <span>
+        <span class="brand__name" lang="th">นำทาง</span>
+        <span class="brand__latin">NamThang</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="On this page">
+      <ul>
+        <li><a href="#what">What it is</a></li>
+        <li><a href="#numbers">Measured</a></li>
+        <li><a href="#keys">Keys</a></li>
+        <li><a href="#limits">Limits</a></li>
+        <li><a href="#install">Install</a></li>
+      </ul>
+    </nav>
+
+    <div class="head-tools">
+      <button class="btn btn--ghost btn--sm" id="read-page" type="button" aria-pressed="false" hidden
+              data-label-read="Read this page" data-label-stop="Stop reading"
+              data-msg-reading="Reading: " data-msg-stopped="Stopped">
+        <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M3 12.5V7.2a1.2 1.2 0 0 1 2.4 0v4.1"/>
+          <path d="M5.4 9.6V4.6a1.2 1.2 0 0 1 2.4 0v5"/>
+          <path d="M7.8 9.8V5.4a1.2 1.2 0 0 1 2.4 0v4.8"/>
+          <path d="M10.2 10.6V7.4a1.2 1.2 0 0 1 2.4 0v4.3a3.9 3.9 0 0 1-3.9 3.9H8a3.6 3.6 0 0 1-2.9-1.5L3.2 11.9"/>
+        </svg>
+        <span class="js-read-label">Read this page</span>
+      </button>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <a class="lang-flag" href="index.html" hreflang="th" lang="th" aria-label="ภาษาไทย">
+          <svg viewBox="0 0 60 40" aria-hidden="true" focusable="false">
+            <rect width="60" height="40" fill="#a51931"/>
+            <rect y="6.667" width="60" height="26.667" fill="#f4f5f8"/>
+            <rect y="13.333" width="60" height="13.333" fill="#2d2a4a"/>
+          </svg>
+        </a>
+        <a class="lang-flag is-current" href="en.html" hreflang="en" lang="en" aria-label="English" aria-current="page">
+          <svg viewBox="0 0 60 30" aria-hidden="true" focusable="false">
+            <clipPath id="ukflag"><rect width="60" height="30"/></clipPath>
+            <g clip-path="url(#ukflag)">
+              <rect width="60" height="30" fill="#012169"/>
+              <path d="M0,0 60,30 M60,0 0,30" stroke="#ffffff" stroke-width="6"/>
+              <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" stroke-width="3"/>
+              <path d="M30,0V30M0,15H60" stroke="#ffffff" stroke-width="10"/>
+              <path d="M30,0V30M0,15H60" stroke="#c8102e" stroke-width="6"/>
+            </g>
+          </svg>
+        </a>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="https://github.com/Mikedev115/NamThang">
+        <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M8 0a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4a3.1 3.1 0 0 1 .8-2.1c-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.6 7.6 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.8 3.8-3.6 4 .3.2.5.7.5 1.4v2.1c0 .2.1.5.5.4A8 8 0 0 0 8 0Z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <p class="eyebrow">Windows · free · pre-alpha</p>
+        <h1 id="hero-h">Hear everything<br><em>the screen changes</em></h1>
+        <p class="hero__lede">
+          NamThang reads the accessibility data Windows already publishes, then says
+          where focus is, what happened and what just changed — keyboard first, and
+          alongside NVDA, JAWS or Narrator rather than instead of them.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn" href="https://github.com/Mikedev115/NamThang-releases/releases/download/v0.1.0/NamThang-0.1.0-setup.exe" download>
+            Download the installer
+            <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3.5 8h9M8.5 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="#install">Install on Windows</a>
+        </div>
+
+        <p class="hero__note">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <circle cx="8" cy="8" r="6.5"/>
+            <path d="M8 4.6v4.2M8 11.2v.2"/>
+          </svg>
+          <span>
+            Status <strong>pre-alpha</strong> — there is an installer to try, but it is
+            not ready for daily use. Download it from this page or this project's Releases
+            page only; anywhere else is not official.
+          </span>
+        </p>
+      </div>
+
+      <div class="demo" id="demo">
+        <div class="demo__bar">
+          <span aria-hidden="true" class="demo__dots"><span></span><span></span><span></span></span>
+          <span>A demo, not a screenshot</span>
+        </div>
+        <div class="demo__body">
+          <p class="demo__label" id="demo-mock-label">Press Tab into this window</p>
+          <div class="mock" role="group" aria-labelledby="demo-mock-label">
+            <p class="mock__title">
+              Invoice.docx
+              <span>Word · mock</span>
+            </p>
+            <div class="mock__row">
+              <input type="text" placeholder="Find in document" aria-label="Find in document (demo)"
+                     data-say="Edit field, Find in document">
+              <button type="button" data-say="Button, Save">Save</button>
+            </div>
+            <div class="mock__row">
+              <button type="button" data-say="Button, Don't save">Don't save</button>
+              <a href="#keys" data-say="Link, Keys that work">Keys that work</a>
+            </div>
+          </div>
+
+          <div class="demo__readout">
+            <p class="demo__label">NamThang says</p>
+            <p class="demo__said">
+              <span class="quote" aria-hidden="true">“</span>
+              <output id="said">Button, Save</output>
+            </p>
+            <div class="demo__meta">
+              <span class="meter" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </span>
+              <span id="demo-ms">focus → first sound <b>12.9</b> ms (p95)</span>
+            </div>
+          </div>
+
+          <div class="demo__opt">
+            <input type="checkbox" id="demo-voice">
+            <label for="demo-voice">
+              Speak the demo with this machine's voice
+              <span class="hint">— off by default, so it never talks over your screen reader</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="facts">
+      <li>Windows 10 / 11</li>
+      <li>offline voice by default</li>
+      <li>no analytics</li>
+      <li>source-available, every line readable</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="what" aria-labelledby="what-h">
+  <div class="wrap">
+    <p class="eyebrow">01 — What it is</p>
+    <div class="sec__head">
+      <h2 id="what-h">Built on what the program reports, not on a guess</h2>
+      <p>
+        Programs on Windows already say what is on screen — the name of a control, its
+        role, its state, its position. NamThang reads that through UI Automation and
+        speaks only what changed. When it knows, it says it knows; when it has to guess,
+        it says it guessed.
+      </p>
+    </div>
+
+    <ul class="points">
+      <li>
+        <span class="points__n" aria-hidden="true">01</span>
+        <h3>Read from what the program confesses</h3>
+        <p>
+          Name, role, state and position come from the system's accessibility tree, not
+          from guessing at pixels — so it never has to guess what a button is.
+        </p>
+      </li>
+      <li>
+        <span class="points__n" aria-hidden="true">02</span>
+        <h3>Fast, and it stops the moment you ask</h3>
+        <p>
+          The target in the plan was under <span class="num">150</span> ms from focus
+          change to first sound; the measurement came in at <span class="num">12.9</span>
+          ms at p95, and <kbd>Ctrl</kbd> cuts the voice at any moment — no waiting for
+          the sentence to end.
+        </p>
+      </li>
+      <li>
+        <span class="points__n" aria-hidden="true">03</span>
+        <h3>Alongside a screen reader, not against it</h3>
+        <p>
+          If you already use NVDA or JAWS, keep it. NamThang adds the beat where reading
+          a whole window is too slow, and it does not take your keys.
+        </p>
+      </li>
+      <li>
+        <span class="points__n" aria-hidden="true">04</span>
+        <h3>The default is that nothing leaves the machine</h3>
+        <p>
+          Speech is synthesized locally with OneCore. Nothing leaves the machine, there
+          is no analytics, and there is no account to create.
+        </p>
+      </li>
+    </ul>
+
+    <p class="aside">
+      <span class="tag">Not finished</span>
+      Planned but not built: command by name, then check the screen really changed ·
+      reading test output in a terminal · a bridge into the browser · voice commands ·
+      image recognition for apps that expose no accessibility
+    </p>
+
+    <figure class="shot shot--wide">
+      <img src="imgs/photo-braille.jpg" width="1024" height="685" decoding="async"
+           alt="A hand resting on a purple refreshable braille display, with a computer keyboard behind it">
+      <figcaption>
+        A refreshable braille display working alongside a keyboard —
+        photo: <span lang="en">Sebastien.delorme</span> /
+        <a href="https://commons.wikimedia.org/wiki/File:Plage-braille.jpg">Wikimedia Commons</a>,
+        licence <span lang="en">CC BY-SA 3.0</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="numbers" aria-labelledby="numbers-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--dark">02 — Measured</p>
+    <div class="sec__head">
+      <h2 id="numbers-h">From focus to first sound, <span class="num">12.9</span> ms</h2>
+      <p>
+        The target set in the plan was under <span class="num">150</span> ms. The result
+        sits <span class="num">11</span> times inside it, which is the room the next
+        layers need. Every number here comes from a CSV the benchmark wrote itself —
+        none of it is an estimate.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat__v">12.9<span class="stat__u">ms</span></span>
+        <span class="stat__k">p95, focus → first sound<br>across 222 focus changes</span>
+      </div>
+      <div class="stat">
+        <span class="stat__v">97.3<span class="stat__u">%</span></span>
+        <span class="stat__k">had a name to speak<br>the rest had none from the system</span>
+      </div>
+      <div class="stat">
+        <span class="stat__v">11<span class="stat__u">×</span></span>
+        <span class="stat__k">inside the 150 ms target<br>room for the layers above</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          222 focus changes across 5 applications — measured 17 November 2026 on the
+          developer's machine (Thai Windows, OneCore Microsoft Pattara)
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Application</th>
+            <th scope="col" class="n">Focus changes</th>
+            <th scope="col" class="n">Had a name</th>
+            <th scope="col" class="n">p50 (ms)</th>
+            <th scope="col" class="n">p95 (ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Chrome</th><td class="n">71</td><td class="n">97.2%</td><td class="n">7.3</td><td class="n">10.7</td></tr>
+          <tr><th scope="row">Explorer</th><td class="n">45</td><td class="n">97.8%</td><td class="n">7.2</td><td class="n">9.1</td></tr>
+          <tr><th scope="row">Windows Settings</th><td class="n">45</td><td class="n">97.8%</td><td class="n">6.9</td><td class="n">11.3</td></tr>
+          <tr><th scope="row">Calculator</th><td class="n">35</td><td class="n">97.1%</td><td class="n">7.2</td><td class="n">9.5</td></tr>
+          <tr><th scope="row">Claude (Electron)</th><td class="n">26</td><td class="n">96.2%</td><td class="n">8.2</td><td class="n">22.6</td></tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">All five</th>
+            <td class="n">222</td><td class="n">97.3%</td><td class="n">7.2</td><td class="n">12.9</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <p class="fine">
+      Not measured: audible onset (that needs a loopback capture) · VS Code and Notepad
+      could not be measured in that run · about 2% of focus events the system never
+      delivered, found by polling alongside
+      <a href="https://github.com/Mikedev115/NamThang/blob/main/docs/p0-report.md">Read the full report</a>
+    </p>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="keys" aria-labelledby="keys-h">
+  <div class="wrap">
+    <p class="eyebrow">03 — Keys that work today</p>
+    <div class="sec__head">
+      <h2 id="keys-h">The keys, and you are using it</h2>
+      <p>
+        There is no menu to hunt through. Everything is on the keyboard, and every key
+        works while focus sits in another program. If another program already owns a key,
+        NamThang says aloud that it could not register it instead of going silent.
+      </p>
+    </div>
+
+    <dl class="keys">
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd></dt>
+        <dd><strong>Cuts the voice immediately</strong> — press once while it is speaking; it carries on from there, no waiting for the sentence to end.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>W</kbd></dt>
+        <dd><strong>Where am I</strong> — says the window and where focus sits right now.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>↓</kbd> / <kbd>↑</kbd></dt>
+        <dd><strong>Next / previous item</strong> — walks the window that has focus, one item at a time.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd></dt>
+        <dd><strong>Next heading</strong> — jumps over body text, heading by heading.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd> / <kbd>B</kbd> / <kbd>E</kbd></dt>
+        <dd><strong>Next link / button / field</strong> — by the kind of control you are looking for.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd></dt>
+        <dd><strong>Read on</strong> — reads from here to the end of the window.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>V</kbd></dt>
+        <dd><strong>Speech history</strong> — replays the last ten lines that were spoken.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F1</kbd></dt>
+        <dd><strong>Keyboard help</strong> — names every key you press; press again to stop.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd></dt>
+        <dd><strong>Stop (backup key)</strong> — if another program owns it, you hear that it could not be registered.</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Q</kbd></dt>
+        <dd><strong>Quit</strong> — nothing is left running on the machine.</dd>
+      </div>
+    </dl>
+
+    <p class="aside">
+      The reading keys move a reading position, not your focus — nothing is clicked or
+      typed for you, so the program you are in keeps working normally.
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="limits" aria-labelledby="limits-h">
+  <div class="wrap">
+    <p class="eyebrow">04 — Limits</p>
+    <div class="sec__head">
+      <h2 id="limits-h">What it cannot do yet</h2>
+      <p>
+        An assistive tool that lies about its own limits is a dangerous tool. This is
+        what NamThang does not do, as of today.
+      </p>
+    </div>
+
+    <ul class="limits">
+      <li>
+        <strong>There is no version to rely on yet</strong>
+        It is pre-alpha and has not been tested widely with real users.
+      </li>
+      <li>
+        <strong>It cannot reach the Windows sign-in screen or UAC</strong>
+        Those two need the system screen reader, because ordinary programs are locked
+        out of them on purpose.
+      </li>
+      <li>
+        <strong>Games and apps that expose no accessibility</strong>
+        They need image recognition, which can be wrong, and the result is tagged
+        “guess” so you know what you are hearing.
+      </li>
+      <li>
+        <strong>Windows only</strong>
+        There are no plans for Linux or macOS.
+      </li>
+      <li>
+        <strong>Not everything is measured</strong>
+        VS Code and Notepad could not be measured in the last run, and the ~2% of focus
+        events the system never delivers need thousands more samples.
+      </li>
+      <li>
+        <strong>Planned work is not here</strong>
+        Command by name, then checking the screen really changed · reading test output in
+        a terminal · a bridge into the browser · voice commands · image recognition for
+        apps that expose no accessibility.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="privacy" aria-labelledby="privacy-h">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">05 — Privacy</p>
+      <h2 id="privacy-h">By default, nothing leaves the machine</h2>
+    </div>
+    <div class="split__body">
+      <p>
+        Speech is synthesized on the machine by Windows OneCore — no connection, no
+        account, and no analytics inside the program.
+      </p>
+      <p>
+        If you turn on the online voice yourself, the settings window says plainly which
+        text goes where, and you can turn it off again at any time. Nothing is switched
+        on quietly.
+      </p>
+      <p class="fine fine--ink">
+        This page has no tracker either: no cookies, no analytics calls.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="install" aria-labelledby="install-h">
+  <div class="wrap">
+    <p class="eyebrow">06 — Install</p>
+    <div class="install">
+      <div>
+        <h2 id="install-h">Installing takes a few minutes</h2>
+        <p class="lede">
+          One installer file. It installs for the current user, needs no administrator
+          rights, and needs no .NET install because the speech engine ships inside it.
+        </p>
+
+        <ol class="steps">
+          <li>
+            <span aria-hidden="true">1</span>
+            <div>
+              <strong>Download</strong>
+              <p>
+                Press the download button for one file,
+                <span lang="en">NamThang-0.1.0-setup.exe</span>, 111.8 MB.
+                Anywhere else is not official.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span aria-hidden="true">2</span>
+            <div>
+              <strong>Install</strong>
+              <p>
+                Double-click and follow the window; about a minute, and no restart. If
+                <span lang="en">Windows protected your PC</span> appears, choose
+                <strong>More info</strong>, then <strong>Run anyway</strong> — the file is
+                not code-signed yet.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span aria-hidden="true">3</span>
+            <div>
+              <strong>Start</strong>
+              <p>
+                Open it from the Start menu. If NVDA is running, close it first so the two
+                voices do not overlap, then press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>W</kbd>
+                to hear where you are · <kbd>Ctrl</kbd> stops speech ·
+                <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Q</kbd> quits.
+              </p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="install__actions">
+          <a class="btn" href="https://github.com/Mikedev115/NamThang-releases/releases/download/v0.1.0/NamThang-0.1.0-setup.exe" download>
+            Download the installer
+            <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 2.5v8M4.5 7.5 8 11l3.5-3.5M3 13.5h10"/>
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="#keys">Shortcuts that work today</a>
+        </div>
+      </div>
+
+      <aside class="spec" aria-labelledby="spec-h">
+        <h3 id="spec-h">What the machine needs</h3>
+        <dl>
+          <dt>System</dt>
+          <dd>Windows 10 (build 19041) or newer · 64-bit</dd>
+          <dt>Size</dt>
+          <dd>installer <span class="num">111.8</span> MB · about <span class="num">143</span> MB installed</dd>
+          <dt>Rights</dt>
+          <dd>current user — no administrator needed</dd>
+          <dt>Remove</dt>
+          <dd>Settings → Apps → NamThang</dd>
+        </dl>
+        <p class="fine fine--ink">
+          The file is not code-signed yet, so Windows shows SmartScreen — choose
+          More info, then Run anyway, and compare the SHA-256 before running it.
+        </p>
+        <p class="fine fine--ink">
+          SHA-256 <code>153E9B752A5F1677AA2E6DB3A1ED9660772B86612852FBC1872E09F902E145E6</code>
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="license" aria-labelledby="license-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--dark">07 — What we promise</p>
+    <div class="sec__head">
+      <h2 id="license-h">Free forever, every line readable</h2>
+      <p>
+        No paid edition, no feature held back for sale, and nothing you cannot check for
+        yourself. The full legal text is in the LICENSE file.
+      </p>
+    </div>
+
+    <ul class="license">
+      <li>
+        <h3>Free for everyone</h3>
+        <p>A blind user pays nothing, and there will be no paid edition later.</p>
+      </li>
+      <li>
+        <h3>The whole code is readable</h3>
+        <p>Read every line to study, check or learn from it — source-available, not open source by the usual definition.</p>
+      </li>
+      <li>
+        <h3>Share it on, never sell it</h3>
+        <p>A foundation, a school or an agency may pass on the unmodified official build.</p>
+      </li>
+      <li>
+        <h3>No resale, no rebranding</h3>
+        <p>It may not be bundled into a paid product, redistributed modified, or have the author's name removed.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__top">
+      <div class="site-foot__brand">
+        <p class="brand__name" lang="th">นำทาง</p>
+        <p class="brand__latin">NamThang</p>
+        <p class="site-foot__by">
+          Created by Chayapol Promsavana (volunteer)<br>
+          <span lang="th">นายชยพล พรมสะวะนา</span><br>
+          <a href="https://github.com/Mikedev115">github.com/Mikedev115</a>
+        </p>
+      </div>
+
+      <nav class="site-foot__nav" aria-label="Documentation">
+        <h2>Docs</h2>
+        <ul>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/user-guide.md">User guide</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/troubleshooting.md">Troubleshooting</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/app-compatibility.md">App compatibility</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/p0-report.md">Measurement report</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-foot__nav" aria-label="Project">
+        <h2>Project</h2>
+        <ul>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/ROADMAP.md">Roadmap</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/architecture.md">Architecture</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/CONTRIBUTING.md">Contributing</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang-releases/releases/download/v0.1.0/NamThang-0.1.0-setup.exe" download>Download</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-foot__nav" aria-label="Rules">
+        <h2>Rules</h2>
+        <ul>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/LICENSE">Licence</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/PRIVACY.md">Privacy</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/DISCLAIMER.md">Disclaimer</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/ACCESSIBILITY.md">Accessibility of this project</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-foot__bottom">
+      <p>This page is a single HTML file with no tracker and no request to another server</p>
+      <p>Updated 17 November 2026</p>
+    </div>
+  </div>
+</footer>
+
+<p class="sr-only" role="status" aria-live="polite" id="read-status"></p>
+
+<script src="app.js" defer></script>
+</body>
+</html>

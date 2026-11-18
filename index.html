@@ -1,0 +1,636 @@
+<!doctype html>
+<!--
+  NamThang landing page — one HTML file, no build step, no tracker, no external JS.
+  Deploy: static. Drop this folder on Cloudflare Pages; index.html is the root.
+
+  Motion road: CSS only. Two short keyframe runs (the speaking meter, the read-aloud
+  pulse) plus state transitions. No scroll animation and no library, because this page
+  is a document first and its own audience may be running a screen reader.
+  Every animation is switched off under prefers-reduced-motion.
+
+  The page must prove what it sells: full keyboard path, visible focus, semantic
+  landmarks, one h1, a real table with headers, and a speech demo that is off by
+  default so it never talks over the reader's own screen reader.
+-->
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NamThang (นำทาง) — ได้ยินทุกอย่างที่จอเปลี่ยน</title>
+<meta name="description" content="NamThang คือตัวช่วยฟรีสำหรับผู้พิการทางสายตาและผู้มีสายตาเลือนรางบน Windows อ่านข้อมูล accessibility ที่มีอยู่แล้ว แล้วบอกด้วยเสียงว่าจอเปลี่ยนอะไร ใช้คีย์บอร์ดเป็นหลัก ทำงานคู่กับ NVDA, JAWS และ Narrator">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="imgs/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="imgs/icon-180.png">
+<link rel="alternate" hreflang="th" href="./">
+<link rel="alternate" hreflang="en" href="en.html">
+<meta property="og:image" content="imgs/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NamThang (นำทาง) — ได้ยินทุกอย่างที่จอเปลี่ยน">
+<meta property="og:description" content="ตัวช่วยฟรีบน Windows สำหรับผู้พิการทางสายตา: โฟกัสเปลี่ยนถึงเสียงแรก 12.9 ms (p95) จากการวัด 222 ครั้ง">
+<meta property="og:locale" content="th_TH">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปที่เนื้อหาหลัก</a>
+
+<div class="scroll-cue" id="scroll-cue" aria-hidden="true">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+    <path d="M8 3v10M4 9l4 4 4-4"/>
+  </svg>
+</div>
+
+<header class="site-head">
+  <div class="wrap site-head__in">
+    <a class="brand" href="#top" aria-label="NamThang นำทาง — กลับขึ้นด้านบน">
+      <img class="brand__mark" src="imgs/logo.svg" alt="" width="32" height="32">
+      <span>
+        <span class="brand__name">นำทาง</span>
+        <span class="brand__latin">NamThang</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="เนื้อหาหน้านี้">
+      <ul>
+        <li><a href="#what">คืออะไร</a></li>
+        <li><a href="#numbers">ตัวเลขที่วัดได้</a></li>
+        <li><a href="#keys">คีย์ที่ใช้จริง</a></li>
+        <li><a href="#limits">ข้อจำกัด</a></li>
+        <li><a href="#install">ติดตั้ง</a></li>
+      </ul>
+    </nav>
+
+    <div class="head-tools">
+      <button class="btn btn--ghost btn--sm" id="read-page" type="button" aria-pressed="false" hidden
+              data-label-read="อ่านหน้านี้" data-label-stop="หยุดอ่าน"
+              data-msg-reading="กำลังอ่าน: " data-msg-stopped="หยุดอ่านแล้ว">
+        <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M3 12.5V7.2a1.2 1.2 0 0 1 2.4 0v4.1"/>
+          <path d="M5.4 9.6V4.6a1.2 1.2 0 0 1 2.4 0v5"/>
+          <path d="M7.8 9.8V5.4a1.2 1.2 0 0 1 2.4 0v4.8"/>
+          <path d="M10.2 10.6V7.4a1.2 1.2 0 0 1 2.4 0v4.3a3.9 3.9 0 0 1-3.9 3.9H8a3.6 3.6 0 0 1-2.9-1.5L3.2 11.9"/>
+        </svg>
+        <span class="js-read-label">อ่านหน้านี้</span>
+      </button>
+      <div class="lang-switch" role="group" aria-label="ภาษา">
+        <a class="lang-flag is-current" href="index.html" hreflang="th" lang="th" aria-label="ภาษาไทย" aria-current="page">
+          <svg viewBox="0 0 60 40" aria-hidden="true" focusable="false">
+            <rect width="60" height="40" fill="#a51931"/>
+            <rect y="6.667" width="60" height="26.667" fill="#f4f5f8"/>
+            <rect y="13.333" width="60" height="13.333" fill="#2d2a4a"/>
+          </svg>
+        </a>
+        <a class="lang-flag" href="en.html" hreflang="en" lang="en" aria-label="English">
+          <svg viewBox="0 0 60 30" aria-hidden="true" focusable="false">
+            <clipPath id="ukflag"><rect width="60" height="30"/></clipPath>
+            <g clip-path="url(#ukflag)">
+              <rect width="60" height="30" fill="#012169"/>
+              <path d="M0,0 60,30 M60,0 0,30" stroke="#ffffff" stroke-width="6"/>
+              <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" stroke-width="3"/>
+              <path d="M30,0V30M0,15H60" stroke="#ffffff" stroke-width="10"/>
+              <path d="M30,0V30M0,15H60" stroke="#c8102e" stroke-width="6"/>
+            </g>
+          </svg>
+        </a>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="https://github.com/Mikedev115/NamThang">
+        <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M8 0a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.5c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4a3.1 3.1 0 0 1 .8-2.1c-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.6 7.6 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.8 3.8-3.6 4 .3.2.5.7.5 1.4v2.1c0 .2.1.5.5.4A8 8 0 0 0 8 0Z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <p class="eyebrow">Windows · ฟรี · pre-alpha</p>
+        <h1 id="hero-h">ได้ยินทุกอย่าง<br><em>ที่จอเปลี่ยน</em></h1>
+        <p class="hero__lede">
+          <span lang="en">NamThang</span> อ่านข้อมูล accessibility ที่
+          <span lang="en">Windows</span> บอกอยู่แล้ว แล้วพูดออกมาว่าโฟกัสอยู่ที่ไหน
+          เกิดอะไรขึ้น และอะไรเพิ่งเปลี่ยนไป — ใช้คีย์บอร์ดเป็นหลัก
+          ทำงานคู่กับ <span lang="en">NVDA</span>, <span lang="en">JAWS</span> และ
+          <span lang="en">Narrator</span> ไม่ได้มาแทนกัน
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn" href="https://github.com/Mikedev115/NamThang-releases/releases/download/v0.1.0/NamThang-0.1.0-setup.exe" download>
+            ดาวน์โหลดตัวติดตั้ง
+            <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3.5 8h9M8.5 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="#install">ติดตั้งบน Windows</a>
+        </div>
+
+        <p class="hero__note">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <circle cx="8" cy="8" r="6.5"/>
+            <path d="M8 4.6v4.2M8 11.2v.2"/>
+          </svg>
+          <span>
+            สถานะ <strong>pre-alpha</strong> — มีตัวติดตั้งให้ลองแล้ว แต่ยังไม่พร้อมใช้ประจำวัน
+            ดาวน์โหลดได้จากหน้านี้หรือหน้า Releases ของ <span lang="en">GitHub</span> เท่านั้น ที่อื่นไม่ใช่ตัวทางการ
+          </span>
+        </p>
+      </div>
+
+      <div class="demo" id="demo">
+        <div class="demo__bar">
+          <span aria-hidden="true" class="demo__dots"><span></span><span></span><span></span></span>
+          <span>ตัวอย่างการใช้งาน — จำลอง ไม่ใช่ภาพหน้าจอ</span>
+        </div>
+        <div class="demo__body">
+          <p class="demo__label" id="demo-mock-label">ลองกด Tab เข้าไปในหน้าต่างนี้</p>
+          <div class="mock" role="group" aria-labelledby="demo-mock-label">
+            <p class="mock__title">
+              ใบแจ้งหนี้.docx
+              <span><span lang="en">Word</span> · จำลอง</span>
+            </p>
+            <div class="mock__row">
+              <input type="text" placeholder="ค้นหาในเอกสาร" aria-label="ค้นหาในเอกสาร (ตัวอย่าง)"
+                     data-say="ช่องแก้ไข ค้นหาในเอกสาร">
+              <button type="button" data-say="ปุ่ม บันทึก">บันทึก</button>
+            </div>
+            <div class="mock__row">
+              <button type="button" data-say="ปุ่ม ไม่บันทึก">ไม่บันทึก</button>
+              <a href="#keys" data-say="ลิงก์ คีย์ที่ใช้จริง">คีย์ที่ใช้จริง</a>
+            </div>
+          </div>
+
+          <div class="demo__readout">
+            <p class="demo__label">NamThang พูด</p>
+            <p class="demo__said">
+              <span class="quote" aria-hidden="true">“</span>
+              <output id="said">ปุ่ม บันทึก</output>
+            </p>
+            <div class="demo__meta">
+              <span class="meter" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </span>
+              <span id="demo-ms">โฟกัส → เสียงแรก <b>12.9</b> ms (p95)</span>
+            </div>
+          </div>
+
+          <div class="demo__opt">
+            <input type="checkbox" id="demo-voice">
+            <label for="demo-voice">
+              ออกเสียงตัวอย่างด้วยเสียงในเครื่องนี้
+              <span class="hint">— ปิดไว้เป็นค่าเริ่มต้น เพื่อไม่ให้ทับเสียง screen reader ของคุณ</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="facts">
+      <li><span lang="en">Windows</span> 10 / 11</li>
+      <li>เสียงออฟไลน์เป็นค่าเริ่มต้น</li>
+      <li>ไม่มี analytics</li>
+      <li>source-available ตรวจโค้ดได้ทั้งหมด</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="what" aria-labelledby="what-h">
+  <div class="wrap">
+    <p class="eyebrow">01 — คืออะไร</p>
+    <div class="sec__head">
+      <h2 id="what-h">ทำงานจากข้อมูลจริง ไม่ใช่การเดาจากภาพ</h2>
+      <p>
+        โปรแกรมบน <span lang="en">Windows</span> บอกอยู่แล้วว่าตัวเองมีอะไรบนจอ — ชื่อของปุ่ม
+        บทบาท สถานะ ตำแหน่ง <span lang="en">NamThang</span> อ่านข้อมูลชุดนี้ผ่าน
+        <span lang="en">UI Automation</span> แล้วเลือกมาพูดเฉพาะสิ่งที่เปลี่ยน
+        ถ้ารู้ก็บอกว่ารู้ ถ้าเดา ก็ติดป้ายว่าเดา
+      </p>
+    </div>
+
+    <ul class="points">
+      <li>
+        <span class="points__n" aria-hidden="true">01</span>
+        <h3>อ่านจากสิ่งที่โปรแกรมสารภาพ</h3>
+        <p>
+          ชื่อ ปุ่ม บทบาท สถานะ และตำแหน่ง มาจาก accessibility tree ของระบบ
+          ไม่ใช่การไล่เดาจากพิกเซล จึงไม่ต้องเดาว่าปุ่มนี้คืออะไร
+        </p>
+      </li>
+      <li>
+        <span class="points__n" aria-hidden="true">02</span>
+        <h3>พูดเร็ว และหยุดได้ทันที</h3>
+        <p>
+          เป้าหมายในแผนคือโฟกัสเปลี่ยนถึงเสียงแรกต่ำกว่า <span class="num">150</span> ms
+          วัดจริงได้ <span class="num">12.9</span> ms ที่ p95 และกด <kbd>Ctrl</kbd>
+          ตัดเสียงได้ทุกเมื่อ ไม่ต้องรอให้ประโยคจบ
+        </p>
+      </li>
+      <li>
+        <span class="points__n" aria-hidden="true">03</span>
+        <h3>อยู่ร่วมกับ screen reader ไม่ใช่แข่ง</h3>
+        <p>
+          คนที่ใช้ <span lang="en">NVDA</span> หรือ <span lang="en">JAWS</span> อยู่แล้ว
+          ยังใช้ตัวเดิมได้ <span lang="en">NamThang</span> เสริมในจังหวะที่การอ่านทั้งหน้าไม่ทัน
+          และไม่แย่งคีย์ของคุณ
+        </p>
+      </li>
+      <li>
+        <span class="points__n" aria-hidden="true">04</span>
+        <h3>ค่าเริ่มต้นคือไม่ส่งอะไรออกไป</h3>
+        <p>
+          เสียงพูดสร้างในเครื่องด้วย <span lang="en">OneCore</span>
+          ไม่มีข้อมูลออกจากเครื่อง ไม่มี analytics และไม่มีบัญชีให้สมัคร
+        </p>
+      </li>
+    </ul>
+
+    <p class="aside">
+      <span class="tag">ยังไม่เสร็จ</span>
+      อยู่ในแผนแต่ยังไม่ทำ: สั่งด้วยชื่อแล้วตรวจว่าจอเปลี่ยน · อ่านผลเทสต์ใน terminal ·
+      สะพานต่อไปยังเบราว์เซอร์ · คำสั่งเสียง · รู้จำภาพสำหรัยแอปที่ไม่เปิด accessibility
+    </p>
+
+    <figure class="shot shot--wide">
+      <img src="imgs/photo-braille.jpg" width="1024" height="685" decoding="async"
+           alt="มือข้างหนึ่งวางนิ้วบนจอเบรลล์แบบรีเฟรชได้สีม่วง ซึ่งวางอยู่หน้าคีย์บอร์ดคอมพิวเตอร์">
+      <figcaption>
+        จอเบรลล์แบบรีเฟรชได้ทำงานคู่กับคีย์บอร์ด —
+        ภาพ: <span lang="en">Sebastien.delorme</span> /
+        <a href="https://commons.wikimedia.org/wiki/File:Plage-braille.jpg"><span lang="en">Wikimedia Commons</span></a>,
+        สัญญาอนุญาต <span lang="en">CC BY-SA 3.0</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="numbers" aria-labelledby="numbers-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--dark">02 — ตัวเลขที่วัดได้</p>
+    <div class="sec__head">
+      <h2 id="numbers-h">จากโฟกัสถึงเสียงแรก <span class="num">12.9</span> ms</h2>
+      <p>
+        เป้าที่ตั้งไว้ในแผนคือต่ำกว่า <span class="num">150</span> ms
+        ผลคือห่างจากเป้าอยู่ <span class="num">11</span> เท่า ซึ่งเป็นที่ว่างให้ชั้นถัดไป
+        ต่อยอดได้ ตัวเลขทั้งหมดมาจากไฟล์ <span lang="en">CSV</span> ที่ตัววัดเขียนเอง
+        ไม่ใช่การประมาณ
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat__v">12.9<span class="stat__u">ms</span></span>
+        <span class="stat__k">p95 ของโฟกัส → เสียงแรก<br>จากการเปลี่ยนโฟกัส 222 ครั้ง</span>
+      </div>
+      <div class="stat">
+        <span class="stat__v">97.3<span class="stat__u">%</span></span>
+        <span class="stat__k">มีชื่อให้อ่าน<br>ที่เหลือระบบไม่ได้ให้ชื่อมา</span>
+      </div>
+      <div class="stat">
+        <span class="stat__v">11<span class="stat__u">×</span></span>
+        <span class="stat__k">ห่างจากเป้า 150 ms<br>เหลือที่ให้ชั้นถัดไปใช้</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption>
+          การเปลี่ยนโฟกัส 222 ครั้งใน 5 โปรแกรม — วัด 17 พ.ย. 2026 บนเครื่องผู้พัฒนา
+          (<span lang="en">Windows</span> ภาษาไทย, เสียง <span lang="en">OneCore Microsoft Pattara</span>)
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">โปรแกรม</th>
+            <th scope="col" class="n">เปลี่ยนโฟกัส</th>
+            <th scope="col" class="n">มีชื่อให้อ่าน</th>
+            <th scope="col" class="n">p50 (ms)</th>
+            <th scope="col" class="n">p95 (ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><span lang="en">Chrome</span></th><td class="n">71</td><td class="n">97.2%</td><td class="n">7.3</td><td class="n">10.7</td></tr>
+          <tr><th scope="row"><span lang="en">Explorer</span></th><td class="n">45</td><td class="n">97.8%</td><td class="n">7.2</td><td class="n">9.1</td></tr>
+          <tr><th scope="row">ตั้งค่า <span lang="en">Windows</span></th><td class="n">45</td><td class="n">97.8%</td><td class="n">6.9</td><td class="n">11.3</td></tr>
+          <tr><th scope="row">เครื่องคิดเลข</th><td class="n">35</td><td class="n">97.1%</td><td class="n">7.2</td><td class="n">9.5</td></tr>
+          <tr><th scope="row"><span lang="en">Claude</span> (Electron)</th><td class="n">26</td><td class="n">96.2%</td><td class="n">8.2</td><td class="n">22.6</td></tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">รวม</th>
+            <td class="n">222</td><td class="n">97.3%</td><td class="n">7.2</td><td class="n">12.9</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <p class="fine">
+      ยังไม่ได้วัด: เวลาที่หูได้ยินจริง (ต้องอัดเสียงวนกลับ) · <span lang="en">VS Code</span> และ
+      <span lang="en">Notepad</span> วัดไม่ได้ในรอบนั้น · เหตุการณ์ที่ระบบไม่ส่งมาเลยราว 2%
+      ซึ่งตรวจพบด้วยการไล่ถามซ้ำ
+      <a href="https://github.com/Mikedev115/NamThang/blob/main/docs/p0-report.md">อ่านรายงานฉบับเต็ม</a>
+    </p>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="keys" aria-labelledby="keys-h">
+  <div class="wrap">
+    <p class="eyebrow">03 — คีย์ที่ใช้จริงวันนี้</p>
+    <div class="sec__head">
+      <h2 id="keys-h">คีย์ที่จำแล้วใช้ได้เลย</h2>
+      <p>
+        ไม่มีเมนูให้ไล่หา ทุกอย่างอยู่บนคีย์บอร์ด และทุกปุ่มทำงานแม้โฟกัสอยู่ในโปรแกรมอื่น
+        ถ้าคีย์ถูกโปรแกรมอื่นจองไปแล้ว <span lang="en">NamThang</span> จะบอกออกเสียงว่าใช้ไม่ได้
+        ไม่เงียบหายไปเฉย ๆ
+      </p>
+    </div>
+
+    <dl class="keys">
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd></dt>
+        <dd><strong>ตัดเสียงทันที</strong> — กดครั้งเดียวตอนกำลังพูด ปล่อยแล้วใช้ต่อได้ ไม่ต้องรอประโยคจบ</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>W</kbd></dt>
+        <dd><strong>ฉันอยู่ตรงไหน</strong> — บอกหน้าต่างและตำแหน่งที่โฟกัสอยู่ตอนนี้</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>↓</kbd> / <kbd>↑</kbd></dt>
+        <dd><strong>ชิ้นถัดไป / ก่อนหน้า</strong> — เดินทีละรายการในหน้าต่างที่โฟกัสอยู่</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd></dt>
+        <dd><strong>หัวข้อถัดไป</strong> — กระโดดข้ามเนื้อหาไปทีละหัวข้อ</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd> / <kbd>B</kbd> / <kbd>E</kbd></dt>
+        <dd><strong>ลิงก์ / ปุ่ม / ช่องกรอกถัดไป</strong> — ตามชนิดของคอนโทรลที่หา</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd></dt>
+        <dd><strong>อ่านต่อเนื่อง</strong> — อ่านจากตรงนี้จนจบหน้าต่าง</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>V</kbd></dt>
+        <dd><strong>ประวัติคำพูด</strong> — ย้อนฟังสิบบรรทัดล่าสุดที่เพิ่งพูดไป</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F1</kbd></dt>
+        <dd><strong>ช่วยคีย์</strong> — กดปุ่มไหนก็บอกชื่อปุ่ม กดอีกครั้งเพื่อปิด</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd></dt>
+        <dd><strong>หยุดเสียง (ปุ่มสำรอง)</strong> — ถ้าถูกโปรแกรมอื่นใช้อยู่ จะได้ยินคำบอกว่าไม่ได้จองคีย์นี้</dd>
+      </div>
+      <div class="keys__row">
+        <dt><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Q</kbd></dt>
+        <dd><strong>ออกจากโปรแกรม</strong> — ปิดแล้วไม่มีอะไรค้างในเครื่อง</dd>
+      </div>
+    </dl>
+
+    <p class="aside">
+      ปุ่มอ่านขยับ “ตำแหน่งอ่าน” ไม่ใช่โฟกัสของคุณ — ไม่มีการกดหรือพิมพ์แทน
+      โปรแกรมที่ใช้อยู่จึงทำงานปกติ
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="limits" aria-labelledby="limits-h">
+  <div class="wrap">
+    <p class="eyebrow">04 — ข้อจำกัด</p>
+    <div class="sec__head">
+      <h2 id="limits-h">สิ่งที่มันยังทำไม่ได้</h2>
+      <p>
+        เครื่องมือช่วยเหลือที่โกหกเรื่องขีดจำกัดของตัวเองคือเครื่องมือที่อันตราย
+        ต่อไปนี้คือสิ่งที่ <span lang="en">NamThang</span> ไม่ทำ หรือยังทำไม่ได้ ณ วันนี้
+      </p>
+    </div>
+
+    <ul class="limits">
+      <li>
+        <strong>ยังไม่มีเวอร์ชันให้ใช้จริง</strong>
+        เป็น pre-alpha ยังไม่ผ่านการทดสอบกับผู้ใช้จริงในวงกว้าง
+      </li>
+      <li>
+        <strong>เข้าไม่ได้: หน้า sign-in และหน้าต่าง <span lang="en">UAC</span></strong>
+        สองจุดนี้ต้องใช้ screen reader ของระบบ เพราะโปรแกรมทั่วไปถูกกันออกโดยเจตนา
+      </li>
+      <li>
+        <strong>เกมและแอปที่ไม่เปิด accessibility</strong>
+        ต้องใช้การรู้จำภาพ ซึ่งอาจผิด และจะถูกติดป้ายว่า “เดา” ให้คุณรู้ตัว
+      </li>
+      <li>
+        <strong><span lang="en">Windows</span> เท่านั้น</strong>
+        ไม่มีแผนสำหรับ <span lang="en">Linux</span> หรือ <span lang="en">macOS</span>
+      </li>
+      <li>
+        <strong>ยังไม่วัดครบ</strong>
+        <span lang="en">VS Code</span> และ <span lang="en">Notepad</span> วัดไม่ได้ในรอบล่าสุด
+        และเหตุการณ์โฟกัสราว 2% ที่ระบบไม่ส่งมา ยังต้องวัดซ้ำอีกหลายพันครั้ง
+      </li>
+      <li>
+        <strong>ฟีเจอร์ในแผนยังไม่เกิด</strong>
+        สั่งด้วยชื่อแล้วตรวจว่าจอเปลี่ยน · อ่านผลเทสต์ใน terminal · สะพานต่อไปยังเบราว์เซอร์ ·
+        คำสั่งเสียง และรู้จำภาพสำหรับแอปที่ไม่เปิด accessibility
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="privacy" aria-labelledby="privacy-h">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">05 — ความเป็นส่วนตัว</p>
+      <h2 id="privacy-h">ค่าเริ่มต้นคือไม่มีอะไรออกจากเครื่อง</h2>
+    </div>
+    <div class="split__body">
+      <p>
+        เสียงพูดถูกสร้างในเครื่องด้วย <span lang="en">OneCore</span> ของ
+        <span lang="en">Windows</span> ไม่ต้องต่อเน็ต ไม่ต้องสมัครบัญชี และไม่มี analytics
+        ในตัวโปรแกรม
+      </p>
+      <p>
+        ถ้าคุณเลือกเปิดเสียงออนไลน์เอง หน้าตั้งค่าจะบอกตรง ๆ ว่าจะส่งข้อความอะไรออกไปที่ไหน
+        และปิดกลับได้ทุกเมื่อ — ไม่มีการเปิดให้เองแบบเงียบ ๆ
+      </p>
+      <p class="fine fine--ink">
+        หน้านี้ก็ไม่มี tracker เช่นกัน ไม่มีคุกกี้ ไม่มีการเรียก analytics ใด ๆ
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="install" aria-labelledby="install-h">
+  <div class="wrap">
+    <p class="eyebrow">06 — ติดตั้ง</p>
+    <div class="install">
+      <div>
+        <h2 id="install-h">ติดตั้งแล้วใช้ได้ในไม่กี่นาที</h2>
+        <p class="lede">
+          ตัวติดตั้งไฟล์เดียว ติดตั้งให้ผู้ใช้คนปัจจุบัน ไม่ต้องใช้สิทธิ์ผู้ดูแลระบบ
+          และไม่ต้องลง <span lang="en">.NET</span> เพิ่ม เพราะตัวสร้างเสียงถูกฝังมาให้แล้ว
+        </p>
+
+        <ol class="steps">
+          <li>
+            <span aria-hidden="true">1</span>
+            <div>
+              <strong>ดาวน์โหลด</strong>
+              <p>
+                กดปุ่มดาวน์โหลด ได้ไฟล์เดียวชื่อ
+                <span lang="en">NamThang-0.1.0-setup.exe</span> ขนาด 111.8 MB
+                ที่อื่นไม่ใช่ตัวทางการ
+              </p>
+            </div>
+          </li>
+          <li>
+            <span aria-hidden="true">2</span>
+            <div>
+              <strong>ติดตั้ง</strong>
+              <p>
+                ดับเบิลคลิกแล้วทำตามหน้าจอ ใช้เวลาราวหนึ่งนาที และไม่ต้องรีสตาร์ต
+                ถ้าขึ้นหน้า <span lang="en">Windows protected your PC</span> ให้กด
+                <strong>ข้อมูลเพิ่มเติม</strong> แล้ว <strong>เรียกใช้ต่อไป</strong>
+                เพราะไฟล์ยังไม่ได้ลงนามดิจิทัล
+              </p>
+            </div>
+          </li>
+          <li>
+            <span aria-hidden="true">3</span>
+            <div>
+              <strong>เริ่มใช้</strong>
+              <p>
+                เปิดจากเมนู Start ถ้าใช้ <span lang="en">NVDA</span> อยู่ให้ปิดก่อน
+                เพื่อไม่ให้เสียงพูดทับกัน แล้วกด <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>W</kbd>
+                เพื่อฟังว่าตอนนี้อยู่ตรงไหน · <kbd>Ctrl</kbd> หยุดพูด ·
+                <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Q</kbd> ออก
+              </p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="install__actions">
+          <a class="btn" href="https://github.com/Mikedev115/NamThang-releases/releases/download/v0.1.0/NamThang-0.1.0-setup.exe" download>
+            ดาวน์โหลดตัวติดตั้ง
+            <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 2.5v8M4.5 7.5 8 11l3.5-3.5M3 13.5h10"/>
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="#keys">ปุ่มลัดที่ใช้ได้ตอนนี้</a>
+        </div>
+      </div>
+
+      <aside class="spec" aria-labelledby="spec-h">
+        <h3 id="spec-h">ต้องมีอะไรบ้าง</h3>
+        <dl>
+          <dt>ระบบ</dt>
+          <dd><span lang="en">Windows</span> 10 (build 19041) หรือใหม่กว่า · 64-bit</dd>
+          <dt>ขนาด</dt>
+          <dd>ตัวติดตั้ง <span class="num">111.8</span> MB · ติดตั้งแล้วราว <span class="num">143</span> MB</dd>
+          <dt>สิทธิ์</dt>
+          <dd>ผู้ใช้ปัจจุบัน — ไม่ต้องเป็นผู้ดูแลระบบ</dd>
+          <dt>ถอน</dt>
+          <dd>Settings → Apps → NamThang</dd>
+        </dl>
+        <p class="fine fine--ink">
+          ไฟล์ยังไม่ได้ลงนามดิจิทัล <span lang="en">Windows</span> จะขึ้น SmartScreen —
+          กด ข้อมูลเพิ่มเติม แล้ว เรียกใช้ต่อไป และเทียบ SHA-256 ก่อนรัน
+        </p>
+        <p class="fine fine--ink">
+          SHA-256 <code>153E9B752A5F1677AA2E6DB3A1ED9660772B86612852FBC1872E09F902E145E6</code>
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="license" aria-labelledby="license-h">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--dark">07 — สัญญากับผู้ใช้</p>
+    <div class="sec__head">
+      <h2 id="license-h">ฟรีตลอดไป ตรวจสอบได้ทุกบรรทัด</h2>
+      <p>
+        ไม่มีรุ่นเสียเงิน ไม่มีฟีเจอร์ที่ถูกล็อกไว้ขาย และไม่มีอะไรที่คุณตรวจสอบเองไม่ได้
+        ข้อความทางกฎหมายฉบับเต็มอยู่ในไฟล์ <span lang="en">LICENSE</span>
+      </p>
+    </div>
+
+    <ul class="license">
+      <li>
+        <h3>ใช้ฟรีทุกคน</h3>
+        <p>ผู้พิการทางสายตาไม่ต้องจ่ายเงินเลย และจะไม่มีรุ่นที่ต้องจ่ายในอนาคต</p>
+      </li>
+      <li>
+        <h3>โค้ดเปิดให้อ่านทั้งหมด</h3>
+        <p>อ่านได้ทุกบรรทัดเพื่อการศึกษา ตรวจสอบ หรือเรียนรู้ — เป็น source-available ไม่ใช่ open source ตามนิยาม</p>
+      </li>
+      <li>
+        <h3>แจกต่อได้ ไม่เก็บเงิน</h3>
+        <p>มูลนิธิ โรงเรียน หรือหน่วยงานสามารถแจกตัวทางการที่ไม่ถูกแก้ได้</p>
+      </li>
+      <li>
+        <h3>ห้ามขายและห้ามรีแบรนด์</h3>
+        <p>ห้ามรวมในสินค้าที่เก็บเงิน ห้ามแจกเวอร์ชันที่แก้ หรือลบชื่อผู้สร้าง</p>
+      </li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__top">
+      <div class="site-foot__brand">
+        <p class="brand__name">นำทาง</p>
+        <p class="brand__latin">NamThang</p>
+        <p class="site-foot__by">
+          สร้างโดย นายชยพล พรมสะวะนา (อาสา)<br>
+          <span lang="en">Chayapol Promsavana (volunteer)</span><br>
+          <a href="https://github.com/Mikedev115">github.com/Mikedev115</a>
+        </p>
+      </div>
+
+      <nav class="site-foot__nav" aria-label="เอกสาร">
+        <h2>เอกสาร</h2>
+        <ul>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/user-guide.md">คู่มือผู้ใช้</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/troubleshooting.md">แก้ปัญหาเบื้องต้น</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/app-compatibility.md">โปรแกรมที่ใช้ได้แค่ไหน</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/p0-report.md">รายงานผลวัด</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-foot__nav" aria-label="โปรเจกต์">
+        <h2>โปรเจกต์</h2>
+        <ul>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/ROADMAP.md">แผนงาน</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/docs/architecture.md">สถาปัตยกรรม</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/CONTRIBUTING.th.md">ร่วมพัฒนา</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang-releases/releases/download/v0.1.0/NamThang-0.1.0-setup.exe" download>ดาวน์โหลด</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-foot__nav" aria-label="กติกา">
+        <h2>กติกา</h2>
+        <ul>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/LICENSE">สัญญาอนุญาต</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/PRIVACY.md">ความเป็นส่วนตัว</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/DISCLAIMER.md">ข้อจำกัดความรับผิด</a></li>
+          <li><a href="https://github.com/Mikedev115/NamThang/blob/main/ACCESSIBILITY.md">การเข้าถึงของโปรเจกต์</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-foot__bottom">
+      <p>หน้านี้เป็น HTML ไฟล์เดียว ไม่มี tracker และไม่เรียกอะไรจากเซิร์ฟเวอร์อื่น</p>
+      <p>อัปเดต 17 พ.ย. 2026</p>
+    </div>
+  </div>
+</footer>
+
+<p class="sr-only" role="status" aria-live="polite" id="read-status"></p>
+
+<script src="app.js" defer></script>
+</body>
+</html>
